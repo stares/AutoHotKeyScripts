@@ -42,3 +42,8 @@ Return
 !z:: ; The ! symbol represents the Alt key, so this line means "when Alt+Z is pressed"
 Send, !w1 ; Send the Alt+W+1 key combination
 return ; End of the hotkey definition
+
+; Disable RShift hotkey for TeamViewer
+#IfWinActive, ahk_exe TeamViewer.exe
+  RShift::return
+#IfWinActive
