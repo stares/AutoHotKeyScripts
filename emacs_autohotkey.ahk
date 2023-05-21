@@ -154,7 +154,7 @@ keys["globalOverride"]
   , "alt"
     : {"m": ["{LWin down}{Up}{LWin up}", False, ""] } }
 
-global appsWithNativeEmacsKeybindings = ["emacs.exe", "rubymine64.exe", "conemu64.exe", "ubuntu2004.exe", "sublime_text.exe", "Zoom.exe", "Code.exe", "WindowsTerminal.exe", "clion64.exe", "Photoshop.exe", "ApplicationFrameHost.exe", "TeamViewer.exe"]
+global appsWithNativeEmacsKeybindings = ["emacs.exe", "rubymine64.exe", "conemu64.exe", "ubuntu2004.exe", "sublime_text.exe", "Zoom.exe", "Code.exe", "WindowsTerminal.exe", "clion64.exe", "Photoshop.exe", "ApplicationFrameHost.exe", "TeamViewer.exe", "Code - Insiders.exe"]
 global ctrlXActive := False
 global ctrlSpaceActive := False
 
