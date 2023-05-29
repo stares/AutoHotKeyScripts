@@ -57,17 +57,21 @@ return
 ^+`:: ; This is a hotkey (Ctrl+Shift+`). Change it to your liking.
 WinGetActiveStats, Title, Width, Height, X, Y
 WinSet, Style, ^0xC00000 ; Remove title bar.
-SysGet, Mon1, MonitorWorkArea, 1 ; fetch monitor 1 dimensions
-SysGet, Mon2, MonitorWorkArea, 2 ; fetch monitor 2 dimensions
-MsgBox, % "Mon1: " Mon1Left ", " Mon1Top ", " Mon1Right ", " Mon1Bottom
-MsgBox, % "Mon2: " Mon2Left ", " Mon2Top ", " Mon2Right ", " Mon2Bottom
+
+SysGet, Mon1, Monitor, 1 ; fetch monitor 1 dimensions
+SysGet, Mon2, Monitor, 2 ; fetch monitor 2 dimensions
+;MsgBox, % "Mon1: " Mon1Left ", " Mon1Top ", " Mon1Right ", " Mon1Bottom
+;MsgBox, % "Mon2: " Mon2Left ", " Mon2Top ", " Mon2Right ", " Mon2Bottom
 
 SysGet, MonitorCount, MonitorCount
 if (MonitorCount > 1) ; check if monitors have same resolution
 {
     TotalWidth := Mon2Right - Mon1Left ; total width calculation
     TotalHeight := Mon1Bottom - Mon1Top ; total height calculation
-    WinMove, %Title%,, Mon1Left, Mon1Top, %TotalWidth%, %TotalHeight% ; Move and resize.
+    TaskBarOffset := 41
+    GapOffset := 7
+    ;MsgBox, %Mon1Left% %Mon1Top% %TotalWidth% %TotalHeight%
+    WinMove, %Title%,, Mon1Left - GapOffset, Mon1Top, TotalWidth + 2 * GapOffset, TotalHeight - TaskBarOffset ; Move and resize.
 }
 else ;
 {
