@@ -68,8 +68,8 @@ if (MonitorCount > 1) ; check if monitors have same resolution
 {
     TotalWidth := Mon1Right - Mon2Left ; total width calculation
     TotalHeight := Mon1Bottom - Mon1Top ; total height calculation
-    TaskBarOffset := 41
-    GapOffset := 7
+    TaskBarOffset := 40
+    GapOffset := 6
     ; MsgBox, %Mon1Left% %Mon1Top% %TotalWidth% %TotalHeight%
     WinMove, %Title%,, Mon2Left - GapOffset, Mon2Top, TotalWidth + 2 * GapOffset, TotalHeight - TaskBarOffset ; Move and resize.
 }
