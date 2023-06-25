@@ -23,7 +23,7 @@
 ; "chrome.exe" (and other EXE names) specifies app specific keybindings taking precendence over "globalEmacs"
 
 ; Syntax Example
-; "globalEmacs" : { "ctrl" { "a": ["{Home}", True, ""] } }
+; "globalEmacs" : { "ctrl" { "a": ["{Home}", False, ""] } }
 ; This keybinding states, for all apps other than Emacs map Ctrl+a to Home and maintain any mark previously set while editing text.
 
 ; "globalEmacs" : { "ctrl" { "k": ["", False, "MacroKillLine"] } }
@@ -59,23 +59,21 @@ global keys
         ,"Space": ["", True, "MacroCtrlSpace"]
         ,"Backspace": ["^+{Left}^x", False,""] }
     , "ctrlXPrefix"
-      : {"c": ["!{F4}", False, ""]
-        ,"f": ["^o", False, ""]
+      : {"f": ["^o", False, ""]
         ,"g": ["^f", False, ""]
         ,"h": ["^a", False, ""]
-        ,"k": ["!{F4}", False, ""]
         ,"r": ["{F5}", False, ""]
         ,"s": ["^s", False, ""]
         ,"u": ["^z", False, ""]
         ,"w": ["{F12}", False, ""] }
     , "alt"
       : {"f": ["^{Right}", True, ""]
-        ,"b": ["^{Left}", True, ""]
         ,"n": ["^n", False, ""]
         ,"v": ["{PgUp}", True, ""]
         ,"w": ["^c", False, ""]
         ,"y": ["^v", False, ""]
-        ,"Backspace": ["^z", False, ""] }
+        ,"Backspace": ["^z", False, ""]
+        ,"q": ["!{F4}", False, ""] } 
    , "altShift"
       : {".": ["^{End}", True, ""]
        , ",": ["^{Home}", True, ""] } } }
@@ -154,19 +152,23 @@ keys["WINWORD.EXE"]
 
 keys["globalOverride"]
 := {"ctrl"
-    : {"x": ["", False, "MacroStartCtrlX"] }
+  : { "x": ["", False, "MacroStartCtrlX"] } 
   , "ctrlXPrefix"
     : {"j": ["^{Esc}", False, ""]
      , "t": ["!{Space}", False, ""]
      , "]": ["^#{Right}", False, ""]
      , "[": ["^#{Left}", False, ""] }
   , "alt"
-    : {"m": ["{LWin down}{Up}{LWin up}", False, ""] } }
+    : {"m": ["{LWin down}{Up}{LWin up}", False, ""]
+     , "j": ["^{Esc}", False, ""]
+     , "h": ["!{Space}", False, ""] } }
 
 global appsWithNativeEmacsKeybindings = ["emacs.exe", "rubymine64.exe", "conemu64.exe", "ubuntu2004.exe", "sublime_text.exe", "Zoom.exe", "Code.exe", "WindowsTerminal.exe", "clion64.exe", "Photoshop.exe", "ApplicationFrameHost.exe", "TeamViewer.exe"]
 global ctrlXActive := False
 global ctrlSpaceActive := False
 
+^0::
+^9::
 ^a::
 ^b::
 ^c::
@@ -291,6 +293,8 @@ LookupAndTranslate(namespace, mods, key)
 ; @param key String key such as a, b, c, etc
 KeybindingExists(namespace, mods, key)
 {
+  OutputDebug key: %key%
+
   Return (keys[namespace] && keys[namespace][mods] && keys[namespace][mods][key])
 }
 
@@ -331,6 +335,25 @@ ParseMods(keystrokes)
   Return keystrokes
 }
 
+; Does an array have a value
+; @param haystack Array of string
+; @param haystack String of value to search for
+; @return Boolean result of the search
+HasVal(haystack, needle) {
+  For index, value in haystack {
+    If (value = needle)
+    {
+      Return index
+    }
+  }
+  if !(IsObject(haystack))
+  {
+    throw Exception("Bad haystack!", -1, haystack)
+  }
+
+  Return 0
+}
+
 ; Parses out the key from a keystrokes string without the modifier
 ; @param keystroke String contains autohotkey keystrokes such as ^c
 ; @return String keys such as c
@@ -346,6 +369,14 @@ ParseKey(keystrokes)
   }
 
   StringRight, letter, keystrokes, 1
+
+  numbers := ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
+  If HasVal(numbers, letter)
+  {
+    Return "number" . letter
+  }
+
   Return letter
 }
 
@@ -476,7 +507,7 @@ ClearCtrlX()
 ; Macro to kill a line and add it to the clipboard
 MacroKillLine()
 {
-  Send {ShiftDown}{END}{ShiftUp}
+  Send {HOME}{ShiftDown}{END}{ShiftUp}
   Send ^x
   Send {Del}
 }
