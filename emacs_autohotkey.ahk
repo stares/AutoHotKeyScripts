@@ -122,6 +122,28 @@ keys["msedge.exe"]
     , "/": ["^/", False, ""]
     , "r": ["^r", False, ""] } }
 
+keys["firefox.exe"]
+:= {"ctrlXPrefix"
+   : {"b": ["^o", False, ""]
+    , "d": ["^+j", False, ""]
+    , "f": ["^l", False, ""]
+    , "k": ["^w", False, ""] }
+  , "alt"
+   : {"n": ["^t", False, ""]
+    , "d": ["^d", False, ""]
+    , "b": ["^b", False, ""]
+    , "i": ["^i", False, ""]
+    , "u": ["^u", False, ""]
+    , "e": ["^e", False, ""]
+    , "\": ["^\", False, ""]
+    , "k": ["^k", False, ""]
+    , "h": ["^h", False, ""]
+    , "v": ["^w", False, ""] }
+  , "ctrl"
+   : {"q": ["^p", False, ""]
+    , "/": ["^/", False, ""]
+    , "r": ["^r", False, ""] } }
+
 keys["Notion.exe"]
 := {"alt"
    : {"d": ["^d", False, ""]
