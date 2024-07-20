@@ -1,3 +1,6 @@
+; map F2 to Task Team
+F2::Send #{Tab}
+
 ; Toggle key Press of j
 !+j::
     RepeatKeyJ := !RepeatKeyJ
