@@ -1,5 +1,5 @@
-; map F2 to Task Team
-F2::Send #{Tab}
+; map F4 to Task View
+F4::Send #{Tab}
 
 ; Toggle key Press of j
 !+j::
