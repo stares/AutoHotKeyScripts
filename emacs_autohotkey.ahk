@@ -185,6 +185,10 @@ keys["globalOverride"]
      , "j": ["^{Esc}", False, ""]
      , "h": ["!{Space}", False, ""] } }
 
+keys["Cursor.exe"]
+:= {"ctrl"
+   : {"k": ["^k", False, ""] } }
+
 global appsWithNativeEmacsKeybindings = ["emacs.exe", "rubymine64.exe", "conemu64.exe", "ubuntu2004.exe", "sublime_text.exe", "Zoom.exe", "WindowsTerminal.exe", "clion64.exe", "Photoshop.exe", "ApplicationFrameHost.exe", "TeamViewer.exe"]
 global ctrlXActive := False
 global ctrlSpaceActive := False
