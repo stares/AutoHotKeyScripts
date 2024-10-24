@@ -152,7 +152,8 @@ keys["Notion.exe"]
     , "u": ["^u", False, ""]
     , "e": ["^e", False, ""] }
   , "ctrl"
-   : {"q": ["^p", False, ""] } }
+   : {"q": ["^p", False, ""]
+    , "k": ["", False, ""] } }
 
 keys["Snipaste.exe"]
 := {"alt"
